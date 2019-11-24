@@ -26,7 +26,7 @@ openssl x509 -req -sha256 -days 365 -in dashboard.csr -signkey dashboard.key -ou
 * Create a role for dashboard service account to use pod security policy
 
 ~~~
-kubectl -n kube-system create role psp:dashboard --verb=use --resource=podsecuritypolicy --resource-name=dashboard
+kubectl create -f role.yaml
 kubectl -n kube-system create rolebinding kubernetes-dashboard-policy --role=psp:dashboard --serviceaccount=kube-system:kubernetes-dashboard
 kubectl --as=system:serviceaccount:kube-system:kubernetes-dashboard -n kube-system auth can-i use podsecuritypolicy/dashboard
 
